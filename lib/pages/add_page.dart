@@ -14,7 +14,7 @@ class _AddPageState extends State<AddPage> {
   TextEditingController text1 = TextEditingController();
   TextEditingController text2 = TextEditingController();
   TextEditingController text3 = TextEditingController();
-  Controller controller = Get.put(Controller());
+  Controller controller = Get.find(tag: "Controller");
 
   @override
   Widget build(BuildContext context) {
@@ -65,20 +65,22 @@ class _AddPageState extends State<AddPage> {
               if (text1.value.text.isEmpty ||
                   text2.value.text.isEmpty ||
                   text3.value.text.isEmpty) {
-                 alert(
-                  context,
-                  title: Text('Alert'),
-                  content: Text('It is fun!'),
-                  textOK: Text('Yes'),
-                );
+                print("Bos");
+                Get.snackbar("Dikkat", "Tum Bosluklar Doldurulmalı !!!",
+                    messageText:  Text("Tum Bosluklar Doldurulmalı",style: TextStyle(
+                        fontWeight: FontWeight.bold
+                    ),),
+                    titleText: Text("Dikkat",style: TextStyle(
+                  fontWeight: FontWeight.bold
+                ),),icon: Icon(Icons.error) );
               } else {
                 controller.Add(
                     text1.value.text, text2.value.text, text3.value.text);
-                print("Name : "+text1.toString()+" City : "+text2.toString()+" Age : "+text3.toString());
+                Navigator.pop(context);
+
 
               }
 
-              Get.back();
             },
             child: Text("Kaydet")),
       ],

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttergetx/controller/controller.dart';
 import 'package:fluttergetx/pages/add_page.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  Controller controller = Get.put(Controller());
+  Controller controller = Get.put(Controller(),tag:  "Controller");
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,7 @@ class MyHomePage extends StatelessWidget {
           actions: [
             InkWell(
               onTap: () {
-                Get.to(AddPage());
+                Navigator.push( context,CupertinoPageRoute(builder: (context) => AddPage(),));
               },
               child: Icon(
                 Icons.event_note_rounded,
@@ -46,12 +47,12 @@ class MyHomePage extends StatelessWidget {
           ],
           title: Text("Flutter State Management Example"),
         ),
-        body: Obx(() => controller.Person.isEmpty
+        body: Obx(() => controller.person.isEmpty
             ? Center(child: Text("Yukaridaki ikondan ekleme yapiniz.."))
             : ListView.builder(
           //asagi yukari sekilde hareket icin yumusak bir gecis
             physics: BouncingScrollPhysics(),
-                itemCount: controller.Person.length,
+                itemCount: controller.person.length,
                 itemBuilder: (context, index) {
                   return PersonListTile(
                     index: index,
@@ -59,3 +60,5 @@ class MyHomePage extends StatelessWidget {
                 })));
   }
 }
+
+
